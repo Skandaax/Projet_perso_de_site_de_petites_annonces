@@ -1,39 +1,44 @@
 <?php
-
-
+//---crée une session ou restaure celle trouvée sur le serveur,------------------- 
+//---via l'identifiant de session passé dans une requête GET, 
+//---POST ou par un cookie--------------------------------------------------------
+session_start();
+var_dump($_SESSION);
 //--------------------------------------------------------------------------------
 // Inclusions class//
 // Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
 
 
-
-
-
 //--------------------------------------------------------------------------------
 // Rooter
 //---Structure permetant d'appeler une action en fonction de la requête utilisteur
+$route = isset($request["route"])? $request["route"] : "home";
 
-
-
-
-
-
-
-
-
-
+switch($route) {
+    case "home" : $include = showHome();
+        break;
+    case "logout" : $include =  showLogout();
+        break;
+    case "publish" : $include = showPublish();
+        break;
+    default : $include = showHome();
+}
 
 //--------------------------------------------------------------------------------
 // Fonctionnalités d'affichage :
 // Actions déclenchées en fonction du choix de l'utilisateur
-// 1. choix = 1 fonction avc deux "types" de fonctions, celles qui mèneront à un affichage, et celles qui seront redirigés (vers un choix conduisant à un affichage)
+// choix = 1 fonction avc deux "types" de fonctions, celles qui mèneront à un affichage, et celles qui seront redirigés (vers un choix conduisant à un affichage)
+function showHome() : string {
+    return "home.php";
+}
 
+function showLogout() {
+    return "inscription.php";
+}
 
-
-
-
-
-
+function showPublish() {
+    return "publish.php";
+}
 
 
 
@@ -41,9 +46,6 @@
 
 
 //---Traitement d'un nouvelle utilisateur---
-
-
-
 
 
 
@@ -68,7 +70,7 @@
 
         <!---Inclusion sous templates--->
 
-       
+       <?php require "html/$include" ?>
 
 </body>
 </html>v

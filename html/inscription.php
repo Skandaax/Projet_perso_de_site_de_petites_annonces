@@ -24,6 +24,9 @@
         <div id="espace_2">
             <input type="text" id="email" name="email" placeholder="Votre email" required>
         </div>
+        <div id="espace_2">
+            <input type="text" id="telephone" name="telephoe" placeholder="téléphone" >
+        </div>
         <div id="espace_3">
             <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
         </div>
