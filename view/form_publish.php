@@ -3,7 +3,12 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---Défini les actions de l'utilisateur-------------------------------------------------
-
+class annonce {
+    private $id_annonce;
+    private $titre_annonce;
+    private $description;
+    private $prix;
+    private $fichier;
 
     //---Constructeur de la classe qui appelle cette méthode-----------------------------
     //---à chaque création d'une nouvelle instance de l'objet----------------------------
@@ -11,7 +16,9 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
     //---Get - Récupère la valeur d'une proprièté-----------------------------------------
     //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
-    
+
+
+}
 
 //---Extension de la base de donnée dbconnect-----------------------------------
 
@@ -28,4 +35,3 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 
     //---Supprimer une ligne de la table-----------------------------------------
-

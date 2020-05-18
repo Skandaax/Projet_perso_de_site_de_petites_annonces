@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Sécurité</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
 
 </head>
 
@@ -19,7 +19,7 @@
             </div>
             <div class="m-right">
                 <a href="index.php?route=home" class="m-link">Accueil</a>
-                <a href="index.php?route=logout" class="m-link">Mon compte</a>
+                <a href="index.php?route=membre" class="m-link">Mon compte</a>
                 <a href="index.php?route=publish" class="m-link">Publier une annonce</a>
             </div>
         </div>

@@ -3,7 +3,7 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---Défini les actions de l'utilisateur-------------------------------------------------
-class User {
+class User extends DbConnect {
     private $idutilisateur;
     private $pseudo;
     private $email;
