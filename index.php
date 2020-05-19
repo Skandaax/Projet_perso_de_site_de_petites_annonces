@@ -7,8 +7,8 @@ var_dump($_SESSION);
 
 //---Chargement automatique des class---------------------------------------------
 spl_autoload_register(function ($class) {
-    if(file_exists("view/$class.php")) {
-        require_once "view/$class.php";
+    if(file_exists("models/$class.php")) {
+        require_once "models/$class.php";
     }
 });
 
@@ -48,7 +48,7 @@ switch($route) {
 // Fonctionnalités d'affichage : 
 
 function showHome() : string {
-    if(isset($_SESSION["utilisateur"])){
+    if(isset($_SESSION["utilisateur"])) {
         header("location:index.php?route=membre");
     }
     return "home.php";
@@ -72,18 +72,33 @@ function showPublish() {
 function insert_user() {
 
 //---Traitement d'un nouvelle utilisateur---
-if(!empty($_POST["pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) 
-     {
-         $user = new Utilisateur();
-         $user->setPassword($_POST["pseudo"]);
-         $user->setPassword($_POST["phone"]);
-         $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
-         $user->setPassword2(password_hash($_POST["password"], PASSWORD_DEFAULT));
-         $user->setEmail($_POST["email"]);
+if(!empty($_POST["pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) {
 
-     }
+    if (preg_match('#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ-ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $_POST["PSEUDO"])) {
+
+        echo "ok";
+
+        $user = new Utilisateur();
+        $user->setIdUtilisateur($_POST["utlisateur"]);
+        $user->setPseudo($_POST["pseudo"]);
+        $user->setEmail($_POST["email"]);
+        $user->setPhone($_POST["phone"]);
+        $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+
+        $user->Insert();
+
+        $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['password'] = $password;
+
+        echo "Le pseudo est correct";
+
+    }else {
+            //on ne peut pas ajouter le nom à la base de données
+            echo "Le pseudo n'est pas correct";
+        }
 
      header('Location:index.php');
+    }
 }
 
 //---Connection d'un utilisateur---

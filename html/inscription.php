@@ -17,7 +17,7 @@
         <h2> Inscription </h2>
     </div>
 &nbsp;
-    <form action="index.php?route=insert_user" method="POST">
+    <form action="../index.php?route=insert_user" method="POST">
         <div id="espace_1">
             <input type="text" id="pseudo" name="pseudo" placeholder="pseudo"  required>
         </div>
@@ -37,7 +37,7 @@
             <input type="submit" value="envoyer">
         </div>
     </form>
-    <div class="log"><a href="index.php?route=login">Login</a></div>
+    <div class="log"><a href="../index.php?route=login">Login</a></div>
 </div>
 
 </body>

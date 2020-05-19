@@ -50,7 +50,7 @@ class Utilisateur extends DbConnect {
         return $this->phone;
     }
 
-    function setPssword(string $password) {
+    function setPassword(string $password) {
         $this->password = $password;
     }
 
@@ -73,7 +73,7 @@ class Utilisateur extends DbConnect {
             $user = new utilisateur();
             $user->setIdUtilisateur($data['idutilisateur']);
             $user->setPhone($data['phone']);
-            $user->setpseudo($data['pseudo']);
+            $user->setPseudo($data['Pseudo']);
             $user->setEmail($data['email']);
             $user->setPassword($data['Password']);
 
@@ -96,6 +96,8 @@ class Utilisateur extends DbConnect {
 
     //---Permet d'insérer une nouvelle ligne de données dans une table-----------
     function insert() {
+        var_dump($this);
+        
         $query = "INSERT INTO utilisateur(id_utilisateur,pseudo,phone, email,Password) 
                     VALUES (:pseudo, :phone, :email, :Password)";
 

@@ -13,7 +13,7 @@
 </div>
 &nbsp;
 <div class="center_div troisd ">
-    <form action="index.php?route=connect_user" method="POST">
+    <form action="../index.php?route=connect_user" method="POST">
         <div id="espace_2 login_center"><input type="text" id="pseudo name="utilisateur" placeholder="Votre pseudo"></div>
         
         <div id="espace_3"> <input type="password" id="password" name="password" placeholder="Votre mot de passe"></div>
