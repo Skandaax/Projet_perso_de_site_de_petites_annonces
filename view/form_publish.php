@@ -3,7 +3,7 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---Défini les actions de l'utilisateur-------------------------------------------------
-class annonce {
+class annonce extends dbconnect {
     private $id_annonce;
     private $titre_annonce;
     private $description;

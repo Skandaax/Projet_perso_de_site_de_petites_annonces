@@ -20,7 +20,7 @@
             <div class="m-right">
                 <a href="index.php?route=home" class="m-link">Accueil</a>
                 <a href="index.php?route=membre" class="m-link">Mon compte</a>
-                <a href="index.php?route=publish" class="m-link">Publier une annonce</a>
+                <a href="index.php?publish" class="m-link">Publier une annonce</a>
             </div>
         </div>
     </nav>

@@ -19,48 +19,53 @@ require "config/global.php";
 
 
 //--------------------------------------------------------------------------------
-// Rooter
+//Rooter
 //---Structure permetant d'appeler une action en fonction de la requête utilisteur
-$route = isset($request["route"])? $request["route"] : "home";
+$route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 
 switch($route) {
-    case "home" : $include = showHome();
+    case "home" : $include = showHome(); // Affiche la page d'accueil
         break;
-    case "insert_user" : insert_user();
+    case "insert_user" : insertUser(); // enregigetrement d'un utilisateur
         break;
-    case "connect_user" : connect_user();
+    case "connect_user" : connect_User(); // Connection d'un utilisateur
         break;
-    case "insert_annonce" : insert_annonce();
+    case "membre" : showMembre(); // Afficher l'espace membre pour un utilisateur connecter
+        break; 
+    case "deconnect" : deconnectUser(); // Deconnection de l'utilisateur
         break;
-    case "deconnect" : deconnect_tUser();
+    case "login" : $include = showLogin(); // Action pour charger la page de connection
         break;
-    case "membre" : $include =  showMembre();
+    case "publish" : $include = showPublish(); // Action pour charger la page d'insertion d'une annonce
         break;
-    case "publish" : $include = showPublish();
-        break;
-    case "login" : $include = showLogin();
-        break;
-    default : $include = showHome();
+    default : $include = showHome(); // Afficher la page d'accueil
 }
 
 //--------------------------------------------------------------------------------
 // Fonctionnalités d'affichage :
 // Actions déclenchées en fonction du choix de l'utilisateur
 // choix = 1 fonction avc deux "types" de fonctions, celles qui mèneront à un affichage, et celles qui seront redirigés (vers un choix conduisant à un affichage)
+// Fonctionnalités d'affichage : 
+
 function showHome() : string {
+    if(isset($_SESSION["utilisateur"])){
+        header("location:index.php?route=membre");
+    }
     return "home.php";
 }
 
 function showMembre() {
+    $user = new Utilisateur();
+    $user->selectAll();
     return "membre.php";
-}
-
-function showPublish() {
-    return "publish.php";
 }
 
 function showLogin() {
     return "login.php";
+}
+
+function showPublish() {
+    return "publish.php";
 }
 
 //Fonctionnalité redirigées :
@@ -82,15 +87,15 @@ if(!empty($_POST["pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
 }
 
 //---Connection d'un utilisateur---
-function connect_tUser() {
+function connect_User() {
     
     if(!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
         $user = new Utilisateur();
-        $user->setUtilisateur($_POST["id_utilisateur"]);
+        $user->setPseudo($_POST["pseudo"]);
         $new = $user->verifyUser()?? false;
         
-        if($new) {
-            if(password_verify($_POST["password"], $new->password)) {
+        if($user) {
+            if(password_verify($_POST["password"], $user->password)) {
                 $_SESSION["pseudo"] = $new;
             }
         }
@@ -114,14 +119,15 @@ function deconnectUser() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
     <title>Site de petites annonces</title>
 </head>
 <body>
 
         <!---Inclusion sous templates--->
 
-       <?php require "html/$include" ?>
+        <?php require "html/$include" ?>
 
 </body>
 </html>v
