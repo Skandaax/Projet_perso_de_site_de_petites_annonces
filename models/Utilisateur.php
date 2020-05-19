@@ -98,19 +98,21 @@ class Utilisateur extends DbConnect {
     function insert() {
         var_dump($this);
         
-        $query = "INSERT INTO utilisateur(id_utilisateur,pseudo,phone, email,Password) 
-                    VALUES (:pseudo, :phone, :email, :Password)";
+        $query = "INSERT INTO utilisateur(idutilisateur,Pseudo,phone, email,Password) 
+                    VALUES (:Pseudo, :phone, :email, :Password)";
 
         $result = $this->pdo->prepare($query);
-        $result->bindValue(':idutilisateur', $this->idutilisateur, PDO::PARAM_STR);
-        $result->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
-        $result->bindValue(':phone', $this->phone, PDO::PARAM_STR);
-        $result->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $result->bindValue(':Password', $this->password, PDO::PARAM_STR);
+        $result->bindValue(':idutilisateur', $_POST['idutilisateur'}, PDO::PARAM_STR);
+        $result->bindValue(':Pseudo', $_POST['Pseudo'], PDO::PARAM_STR);
+        $result->bindValue(':phone', $_POST['phone'], PDO::PARAM_STR);
+        $result->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
+        $result->bindValue(':Password', $_POST['Password'], PDO::PARAM_STR);
         $result->execute();
 
-        $this->id = $this->pdo->lastInsertId();
-        return $this;
+        // $this->id = $this->pdo->lastInsertId();
+        // return $this;
+
+
     }
 
 

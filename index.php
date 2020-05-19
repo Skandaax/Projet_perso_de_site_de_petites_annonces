@@ -23,14 +23,16 @@ require "config/global.php";
 //---Structure permetant d'appeler une action en fonction de la requête utilisteur
 $route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 
+var_dump($route);
+
 switch($route) {
     case "home" : $include = showHome(); // Affiche la page d'accueil
         break;
-    case "insert_user" : insertUser(); // enregigetrement d'un utilisateur
+    case "insert_user" : insert_User(); // enregigetrement d'un utilisateur
         break;
     case "connect_user" : connect_User(); // Connection d'un utilisateur
         break;
-    case "membre" : showMembre(); // Afficher l'espace membre pour un utilisateur connecter
+    case "membre" : $include = showMembre(); // Afficher l'espace membre pour un utilisateur connecter
         break; 
     case "deconnect" : deconnectUser(); // Deconnection de l'utilisateur
         break;
@@ -48,8 +50,8 @@ switch($route) {
 // Fonctionnalités d'affichage : 
 
 function showHome() : string {
-    if(isset($_SESSION["utilisateur"])) {
-        header("location:index.php?route=membre");
+    if(isset($_SESSION["utilisateur"])) { 
+       // header("location:index.php?route=membre"); 
     }
     return "home.php";
 }
@@ -72,7 +74,7 @@ function showPublish() {
 function insert_user() {
 
 //---Traitement d'un nouvelle utilisateur---
-if(!empty($_POST["pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]) && !empty($_POST["password"] === $_POST["password2"])) {
+if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]) && !empty($_POST["Password"] === $_POST["Password2"])) {
 
     if (preg_match('#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ-ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $_POST["PSEUDO"])) {
 
@@ -80,15 +82,15 @@ if(!empty($_POST["pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
 
         $user = new Utilisateur();
         $user->setIdUtilisateur($_POST["utlisateur"]);
-        $user->setPseudo($_POST["pseudo"]);
+        $user->setPseudo($_POST["Pseudo"]);
         $user->setEmail($_POST["email"]);
         $user->setPhone($_POST["phone"]);
-        $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
+        $user->setPassword(password_hash($_POST["Password"], PASSWORD_DEFAULT));
 
         $user->Insert();
 
-        $_SESSION['pseudo'] = $pseudo;
-        $_SESSION['password'] = $password;
+        $_SESSION['Pseudo'] = $pseudo;
+        $_SESSION['Password'] = $password;
 
         echo "Le pseudo est correct";
 
@@ -104,14 +106,14 @@ if(!empty($_POST["pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
 //---Connection d'un utilisateur---
 function connect_User() {
     
-    if(!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
+    if(!empty($_POST["Pseudo"]) && !empty($_POST["pPssword"])) {
         $user = new Utilisateur();
-        $user->setPseudo($_POST["pseudo"]);
+        $user->setPseudo($_POST["Pseudo"]);
         $new = $user->verifyUser()?? false;
         
         if($user) {
-            if(password_verify($_POST["password"], $user->password)) {
-                $_SESSION["pseudo"] = $new;
+            if(password_verify($_POST["Password"], $user->password)) {
+                $_SESSION["Pseudo"] = $new;
             }
         }
     }
@@ -127,8 +129,10 @@ function deconnectUser() {
 //--------------------------------------------------------------------------------
 //.TEMPLATE
 // Affichage du système de templates HTML
-?>
 
+
+?>
+ 
 <!DOCTYPE html>
 <html lang="fr">
 <head>

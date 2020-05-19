@@ -17,7 +17,7 @@
     <h2>Mon compte<h2>
 </div>
 
-<a href="../index.php?route=deconnect">Deconnexion</a>
+<a href="index.php?route=deconnect">Deconnexion</a>
 
 
 </body>

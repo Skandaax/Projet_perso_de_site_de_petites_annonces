@@ -18,9 +18,9 @@
                 <h1 class="logo">Annonces</h1>
             </div>
             <div class="m-right">
-                <a href="../index.php?route=home" class="m-link">Accueil</a>
-                <a href="../index.php?route=membre" class="m-link">Mon compte</a>
-                <a href="../index.php?route=publish" class="m-link">Publier une annonce</a>
+                <a href="index.php?route=home" class="m-link">Accueil</a>
+                <a href="index.php?route=login" class="m-link">Mon compte</a>
+                <a href="index.php?route=publish" class="m-link">Publier une annonce</a>
             </div>
         </div>
     </nav>
@@ -33,7 +33,7 @@
 </div>
 &nbsp;
 <div class="center_div troisd ">
-    <form action="index.php?route=connect_user" method="POST">
+    <form action="index.php?route=insert_user" method="POST">
 
         <div><select name="Catégorie informatique" size="1">
         <option>Catégorie informatique
