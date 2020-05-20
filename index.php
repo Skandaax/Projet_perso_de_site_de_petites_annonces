@@ -51,7 +51,7 @@ switch($route) {
 
 function showHome() : string {
     if(isset($_SESSION["utilisateur"])) { 
-       // header("location:index.php?route=membre"); 
+       header("location:index.php?route=membre"); 
     }
     return "home.php";
 }
@@ -71,26 +71,41 @@ function showPublish() {
 }
 
 //Fonctionnalité redirigées :
-function insert_user() {
+function insert_User() {
+
+echo " je suis bien la";
+
+var_dump($_POST);
 
 //---Traitement d'un nouvelle utilisateur---
 if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]) && !empty($_POST["Password"] === $_POST["Password2"])) {
 
-    if (preg_match('#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ-ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $_POST["PSEUDO"])) {
+    echo "ok";
+
+    if (preg_match('#^[a-zA-Z-àâäéèêëïîôöùûüçæœÆŒ-ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠþÙÚÛÜÝŸàáâãäåæçèéêëìíîïðñòóôõöøœšÞùúûüýÿÇ()]*$#', $_POST["Pseudo"])) {
 
         echo "ok";
 
         $user = new Utilisateur();
-        $user->setIdUtilisateur($_POST["utlisateur"]);
         $user->setPseudo($_POST["Pseudo"]);
         $user->setEmail($_POST["email"]);
         $user->setPhone($_POST["phone"]);
         $user->setPassword(password_hash($_POST["Password"], PASSWORD_DEFAULT));
 
-        $user->Insert();
+        $verif = $user->Insert();
+        
+        var_dump($verif);
 
-        $_SESSION['Pseudo'] = $pseudo;
-        $_SESSION['Password'] = $password;
+        if($verif->getIdUtilisateur() != 0) {
+            $_SESSION['Pseudo'] = $verif->getPseudo();
+            header('Location:index.php?route=membre');
+
+            echo "condition ok";
+        }
+
+        
+        
+
 
         echo "Le pseudo est correct";
 
@@ -99,14 +114,16 @@ if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
             echo "Le pseudo n'est pas correct";
         }
 
-     header('Location:index.php');
+        header('Location:index.php');
     }
+    
 }
+
 
 //---Connection d'un utilisateur---
 function connect_User() {
     
-    if(!empty($_POST["Pseudo"]) && !empty($_POST["pPssword"])) {
+    if(!empty($_POST["Pseudo"]) && !empty($_POST["Password"])) {
         $user = new Utilisateur();
         $user->setPseudo($_POST["Pseudo"]);
         $new = $user->verifyUser()?? false;
