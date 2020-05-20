@@ -56,8 +56,9 @@
             <input type="submit" value="envoyer">
         </div>
     </form>
-    <div class="log"><a href="index.php?route=login">Login</a></div>
+    
 </div>
+<div class="log"><a href="index.php?route=login">Login</a></div>
 
 <!--Footer-->
 <footer  class="f-footer">

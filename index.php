@@ -109,10 +109,6 @@ if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
             echo "condition ok";
         }
 
-        
-        
-
-
         echo "Le pseudo est correct";
 
     }else {
