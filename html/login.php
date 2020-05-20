@@ -43,6 +43,7 @@
         
     </form>    
 </div>
+<div class="log"><a href="index.php?route=inscription">Inscription</a></div>
 
 <!--Footer-->
 <footer  class="f-footer">

@@ -57,15 +57,6 @@
         <br>
         <input type="file" name="fichier"/>
         <div>
-        <h2>Vos informations personnelles<h2>
-        </div>
-        <div id=""> <input type="Pseudo" id="" name="pseudo" placeholder="pseudo"></div>
-        <div id=""> <input type="telephone" id="" name="telephone" placeholder="Téléphone"></div>
-        <div id=""> <input type="email" id="" name="email" placeholder="Email"></div>
-        <div id=""> <input type="password" id="" name="password" placeholder="Mot de passe"></div>
-        <br>
-        <div id=""><input type="submit" value="Publier cette annonce"></div>
-        
     </form>    
 </div>
 

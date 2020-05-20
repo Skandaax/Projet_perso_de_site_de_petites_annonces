@@ -38,6 +38,8 @@ switch($route) {
         break;
     case "login" : $include = showLogin(); // Action pour charger la page de connection
         break;
+    case "inscription" : $include = showInscription(); // Action pour charger la page d'inscription
+        break;
     case "publish" : $include = showPublish(); // Action pour charger la page d'insertion d'une annonce
         break;
     default : $include = showHome(); // Afficher la page d'accueil
@@ -68,6 +70,10 @@ function showLogin() {
 
 function showPublish() {
     return "publish.php";
+}
+
+function showInscription() {
+    return "inscription.php";
 }
 
 //Fonctionnalité redirigées :
