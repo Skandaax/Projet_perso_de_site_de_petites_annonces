@@ -114,7 +114,7 @@ if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
             echo "Le pseudo est déja utilisé";
         }
 
-        header('Location:index.php');
+        header('Location:index.php?route=login');
     }
     
 }
@@ -148,6 +148,8 @@ function deconnectUser() {
     unset($_SESSION["utilisateur"]);
     header('Location:index.php');
  }
+
+
 //--------------------------------------------------------------------------------
 //.TEMPLATE
 // Affichage du système de templates HTML

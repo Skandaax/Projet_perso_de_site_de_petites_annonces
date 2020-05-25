@@ -64,3 +64,78 @@ html, body
     padding-left: 10px;
     text-align: justify;
 }
+
+/* Espacement des champs du formulaire et bouton - perspective 3d de la div */
+#center
+{
+text-align: center;
+margin: auto;
+color: white;
+background-image: none;
+}
+
+.center {
+    text-align: center;
+    width: 100px;
+    margin: auto;
+    margin-top: 100px;
+    color: white;
+    background-image: none;
+}
+
+.center_div {
+    margin: 0 auto;
+    text-align: center;
+    width: 200px;
+    background-image: none;
+    
+}
+
+.log a{
+    margin-top: 30px;
+    width: 200px;
+    background-image: none;
+    color: white;
+}
+
+/* Espacement des champs du formulaire et bouton - perspective 3d de la div */
+input{
+    width: 200px;
+    height: 30px;
+    background-image: none;
+}
+
+#espace_1 {
+    margin-top: 30px;
+}
+
+#espace_2 {
+    margin-top: 10px;
+}
+
+#espace_3 {
+    margin-top: 10px;
+}
+
+#espace_4 {
+    margin-top: 10px;
+}
+
+#espace_5 {
+    margin-top: 10px;
+}
+
+button {
+    background-image: none;
+}
+
+.troisd{
+   
+    transform: scale3d();
+    background-color: grey;
+    width: 300px;
+    height: 330px;
+    position: relative;
+    border: 2 solid black;
+}
+

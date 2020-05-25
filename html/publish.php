@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Publier une annonce</title>
-    <!-- <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <link rel="stylesheet" type="text/css" href="../css/header.css"> -->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
 
 </head>
 
@@ -32,7 +32,7 @@
     <h2>Publier une annonce <h2>
 </div>
 &nbsp;
-<div class="center_div troisd ">
+<div class="center_div">
     <form action="index.php?route=insert_user" method="POST">
 
         <div><select name="Catégorie informatique" size="1">
@@ -48,13 +48,9 @@
         <option>PC de bureau
         </select>
         </div>
-        <br>
-        <div id=""> <input type="password" id="" name="titre_annonce" placeholder="Titre de l'annonce"></div>
-        <br>
-        <div><textarea id="" name="description"></textarea>
-        <br>
-        <div id=""> <input type="prix" id="" name="prix" placeholder="Prix"></div>
-        <br>
+        <div id="espace_2"> <input type="password" id="" name="titre_annonce" placeholder="Titre de l'annonce"></div>
+        <div><textarea id="espace_3" name="description"></textarea>
+        <div id="espace_4"> <input type="prix" id="" name="prix" placeholder="Prix"></div>
         <input type="file" name="fichier"/>
         <div>
     </form>    

@@ -5,10 +5,16 @@ setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 //---Défini les actions de l'utilisateur-------------------------------------------------
 class Utilisateur extends DbConnect {
     private $idutilisateur;
+    private $role;
     private $pseudo;
     private $email;
     private $phone;
     private $password;
+
+    //---Défini le rôle de l'utilisateur-------------------------------------------------
+    private $super_admin;
+    private $membre;
+    private $visiteur;
 
     //---Constructeur de la classe qui appelle cette méthode-----------------------------
     //---à chaque création d'une nouvelle instance de l'objet----------------------------
@@ -109,8 +115,6 @@ class Utilisateur extends DbConnect {
 
         $this->idutilisateur = $this->pdo->lastInsertId();
         return $this;
-
-
     }
 
 
