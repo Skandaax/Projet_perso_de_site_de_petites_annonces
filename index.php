@@ -3,7 +3,7 @@
 //---via l'identifiant de session passé dans une requête GET, 
 //---POST ou par un cookie--------------------------------------------------------
 session_start();
-var_dump($_SESSION);
+// var_dump($_SESSION);
 
 //---Chargement automatique des class---------------------------------------------
 spl_autoload_register(function ($class) {
@@ -23,7 +23,7 @@ require "config/global.php";
 //---Structure permetant d'appeler une action en fonction de la requête utilisteur
 $route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 
-var_dump($route);
+// var_dump($route);
 
 switch($route) {
     case "home" : $include = showHome(); // Affiche la page d'accueil
@@ -59,8 +59,6 @@ function showHome() : string {
 }
 
 function showMembre() {
-    $user = new Utilisateur();
-    $user->selectAll();
     return "membre.php";
 }
 
@@ -81,7 +79,7 @@ function insert_User() {
 
 echo " je suis bien la";
 
-var_dump($_POST);
+// var_dump($_POST);
 
 //---Traitement d'un nouvelle utilisateur---
 if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]) && !empty($_POST["Password"] === $_POST["Password2"])) {
@@ -113,7 +111,7 @@ if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
 
     }else {
             //on ne peut pas ajouter le nom à la base de données
-            echo "Le pseudo n'est pas correct";
+            echo "Le pseudo est déja utilisé";
         }
 
         header('Location:index.php');
@@ -128,16 +126,21 @@ function connect_User() {
     if(!empty($_POST["Pseudo"]) && !empty($_POST["Password"])) {
         $user = new Utilisateur();
         $user->setPseudo($_POST["Pseudo"]);
-        $new = $user->verifyUser()?? false;
+        $user->setPassword($_POST["Password"]);
+        $new = $user->selectbyuser();
         
-        if($user) {
-            if(password_verify($_POST["Password"], $user->password)) {
-                $_SESSION["Pseudo"] = $new;
-            }
+        var_dump($new);
+
+        if($new && password_verify($_POST["Password"], $new['Password'])) {
+            $_SESSION['idutilisateur'] = $new['idtilisateur'];
+            $_SESSION['Pseudo'] = $new['Pseudo'];
+            $_SESSION['Password'] = $new['Password'];
+            header('Location:index.php?route=membre');
+        }else{
+            header('Location:index.php');
         }
     }
-
-     header('Location:index.php');
+    header('Location:index.php?route=membre');
 }
 
 //---Déconnection de l'utilisateur-----------------------------------------------
@@ -168,4 +171,4 @@ function deconnectUser() {
         <?php require "html/$include" ?>
 
 </body>
-</html>v
+</html>

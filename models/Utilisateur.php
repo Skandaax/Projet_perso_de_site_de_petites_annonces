@@ -114,6 +114,17 @@ class Utilisateur extends DbConnect {
     }
 
 
+    //---Permet de me connecter sur une ligne d'une donnée dans une table-----------
+    function selectbyuser(){
+        $querry ="SELECT * FROM utilisateur WHERE Pseudo = :Pseudo;";
+        $result = $this->pdo->prepare($query);
+        $result->execute();
+        $data = $result->fetch();
+    
+            return $this;
+    }
+
+
     //---Mettre à jour un élément de la table------------------------------------
     function update(){
 
@@ -123,5 +134,4 @@ class Utilisateur extends DbConnect {
     function delete() {
 
     }
-
 }
