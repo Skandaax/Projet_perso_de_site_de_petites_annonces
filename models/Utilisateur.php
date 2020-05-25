@@ -24,6 +24,43 @@ class Utilisateur extends DbConnect {
 
     //---Get - Récupère la valeur d'une proprièté-----------------------------------------
     //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
+    //--Rôle de l'utlisateur--------------------------------------------------------------
+    function setRole(string $role){
+        $this->role = $role;
+    }
+        
+    function getRole() : string {
+        return $this->role;
+    }
+    
+    //--->Super administrateur
+    function setSuper_Admin(string $super_admin){
+        $this->super_admin = $super_admin;
+    }
+        
+    function getSuper_Admin() : string {
+        return $this->$super_admin;
+    }
+    
+    //--->Membre
+    function setMembre(string $membre){
+        $this->membre = $membre;
+    }
+            
+    function getMembre() : string {
+        return $this->$membre;
+    }
+
+    //--->Visiteur
+    function setVisiteur(string $visiteur){
+        $this->visiteur = $visiteur;
+    }
+                
+    function getVisiteur() : string {
+        return $this->$visiteur;
+    }
+
+    //---ID Utilisateur-------------------------------------------------------------------
     function setIdUtilisateur(int $id) {
         $this->idutilisateur = $id;
     }
@@ -32,6 +69,7 @@ class Utilisateur extends DbConnect {
         return $this->idutilisateur;
     }
 
+    //---Pseudo de l'utlisateur------------------------------------------------------------
     function setPseudo(string $pseudo){
         $this->pseudo = $pseudo;
     }
@@ -40,6 +78,7 @@ class Utilisateur extends DbConnect {
         return $this->pseudo;
     }
 
+    //--Mail de l'utlisateur---------------------------------------------------------------
     function setEmail(string $email) {
         $this->email = $email;
     }
@@ -48,6 +87,7 @@ class Utilisateur extends DbConnect {
         return $this->email;
     }
 
+    //--Numéro de téléphone de l'utlisateur-------------------------------------------------
     function setPhone(string $phone) {
         $this->phone = $phone;
     }
@@ -56,6 +96,7 @@ class Utilisateur extends DbConnect {
         return $this->phone;
     }
 
+    //--Mot de passe de l'utlisateur--------------------------------------------------------------
     function setPassword(string $password) {
         $this->password = $password;
     }
