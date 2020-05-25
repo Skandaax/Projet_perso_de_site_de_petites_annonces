@@ -118,6 +118,7 @@ class Utilisateur extends DbConnect {
 
         foreach ($datas as $data) {
             $user = new utilisateur();
+            $user->setRole($data['role']);
             $user->setIdUtilisateur($data['idutilisateur']);
             $user->setPhone($data['phone']);
             $user->setPseudo($data['Pseudo']);
@@ -145,13 +146,14 @@ class Utilisateur extends DbConnect {
     function insert() {
         var_dump($this);
         
-        $query = "INSERT INTO utilisateur(Pseudo, email, phone, Password) VALUES (:Pseudo, :email, :phone , :Password)";
+        $query = "INSERT INTO utilisateur(Pseudo, email, phone, Password, role) VALUES (:Pseudo, :email, :phone , :Password, :role)";
 
         $result = $this->pdo->prepare($query);
         $result->bindValue('Pseudo', $this->pseudo, PDO::PARAM_STR);
         $result->bindValue('phone', $this->phone, PDO::PARAM_STR);
         $result->bindValue('email', $this->email, PDO::PARAM_STR);
         $result->bindValue('Password', $this->password, PDO::PARAM_STR);
+        $result->bindValue('role', $this->role, PDO::PARAM_STR);
         $result->execute();
 
         $this->idutilisateur = $this->pdo->lastInsertId();
