@@ -1,6 +1,4 @@
 <?php
-//-----Défini un cookie qui sera envoyé avec le reste des en-têtes HTTP-----------------
-setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---Défini les actions de l'utilisateur-------------------------------------------------
 class Utilisateur extends DbConnect {

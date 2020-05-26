@@ -3,10 +3,10 @@
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
 //---Défini les actions de l'utilisateur-------------------------------------------------
-class categorie extends dbconnect {
+class Categorie extends DbConnect {
 
-    public $id_unite_central
-    public $unitecentral
+    public $id_unite_central;
+    public $unitecentral;
     
 
 
@@ -18,7 +18,7 @@ class categorie extends dbconnect {
     //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
 
 
-}
+
 
 //---Extension de la base de donnée dbconnect-----------------------------------
 
@@ -36,3 +36,4 @@ class categorie extends dbconnect {
 
     //---Supprimer une ligne de la table-----------------------------------------
 
+}

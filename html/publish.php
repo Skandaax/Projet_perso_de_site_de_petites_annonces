@@ -32,7 +32,7 @@
     <h2>Publier une annonce <h2>
 </div>
 <div class="center_div">
-    <form action="index.php?route=insert_user" method="POST">
+    <form action="index.php?route=insert_annonce" method="POST">
         <div>
             <select name="Catégorie informatique" size="1">
             <option>Catégorie informatique
@@ -47,11 +47,14 @@
             <option>PC de bureau
             </select>
         </div>
-        <div id="espace_2"> <input type="password" id="" name="Titre_annonce" placeholder="Titre de l'annonce"></div>
-        <div><textarea id="espace_3" name="description" placeholder="description"></textarea>
-        <div id="espace_4"> <input type="prix" id="" name="prix" placeholder="Prix"></div>
-        <input id="espace_4" type="file" name="fichier"/>
+        <div id="espace_2"> <input type="Titre_annonce" id="" name="Titre_annonce" placeholder="Titre de l'annonce" required></div>
+            <div><textarea id="espace_3" name="description" placeholder="description" required></textarea>
+        <div id="espace_4"> <input type="prix" id="" name="prix" placeholder="Prix" required></div>
+            <input id="espace_4" type="file" name="fichier" required>
         <div>
+        <div id="espace_5">
+            <input type="submit" value="Publier">
+        </div>
     </form>    
 </div>
 

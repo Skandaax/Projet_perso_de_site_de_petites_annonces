@@ -3,7 +3,7 @@
 //---via l'identifiant de session passé dans une requête GET, 
 //---POST ou par un cookie--------------------------------------------------------
 session_start();
-// var_dump($_SESSION);
+var_dump($_SESSION);
 
 //---Chargement automatique des class---------------------------------------------
 spl_autoload_register(function ($class) {
@@ -16,7 +16,6 @@ spl_autoload_register(function ($class) {
 //Inclusions class//
 // Dans le premier temps, nous allons inclure les fichiers de nos cloasse ici pour pouvoir les utiliser
 require "config/global.php";
-
 
 //--------------------------------------------------------------------------------
 //Rooter
@@ -42,39 +41,55 @@ switch($route) {
         break;
     case "publish" : $include = showPublish(); // Action pour charger la page d'insertion d'une annonce
         break;
+    case "insert_annonce" : insert_Annonce(); // Action pour enregistrer une annonce
+        break;
     default : $include = showHome(); // Afficher la page d'accueil
 }
 
 //--------------------------------------------------------------------------------
-// Fonctionnalités d'affichage :
-// Actions déclenchées en fonction du choix de l'utilisateur
-// choix = 1 fonction avc deux "types" de fonctions, celles qui mèneront à un affichage, et celles qui seront redirigés (vers un choix conduisant à un affichage)
-// Fonctionnalités d'affichage : 
-
+//---Fonctionnalités d'affichage :
+//---Actions déclenchées en fonction du choix de l'utilisateur
+//---choix = 1 fonction avc deux "types" de fonctions, celles qui 
+//---mèneront à un affichage, et celles qui seront redirigés 
+//---(vers un choix conduisant à un affichage)
+//---Fonctionnalités d'affichage : 
+//--->redirigé vers l'accueil
 function showHome() : string {
     if(isset($_SESSION["utilisateur"])) { 
        header("location:index.php?route=membre"); 
     }
+
+    // return ["template" => "home.php", "datas" => $datas];
     return "home.php";
 }
 
+//--->redirigé vers l'espace membre
 function showMembre() {
+    // $annonce = new Annonce;
+    // // $annonce->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
+    // $annonce->selectByUser();
+
+    // $datas = [];
+    // return ["template" => "membre.php", "datas" => $datas];
     return "membre.php";
 }
 
+//--->redirigé vers la page login
 function showLogin() {
     return "login.php";
 }
 
+//--->redirigé vers la page publish(publier une annonce)
 function showPublish() {
     return "publish.php";
 }
 
+//--->Redirigé vers la page inscription
 function showInscription() {
     return "inscription.php";
 }
 
-//Fonctionnalité redirigées :
+//--->Fonctionnalité redirigées
 function insert_User() {
 
 echo " je suis bien la";
@@ -119,6 +134,18 @@ if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
     
 }
 
+//--->Inserer des annonces
+function insert_Annonce() {
+    $annonce = new Annonce();
+    $annonce->setTitre_Annonce($_POST["Titre_annonce"]);
+    $annonce->setDescription($_POST["description"]);
+    $annonce->setPrix($_POST["prix"]);
+    $annonce->setFichier($_POST["fichier"]);
+
+    $annonce->insert();
+
+    header('Location:index.php?route=membre');
+}
 
 //---Connection d'un utilisateur---
 function connect_User() {
@@ -168,7 +195,7 @@ function deconnectUser() {
 
         <!---Inclusion sous templates--->
 
-        <?php require "html/$include" ?>
+        <?php  require "html/$include"; ?>
 
 </body>
 </html>

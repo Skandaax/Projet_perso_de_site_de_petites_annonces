@@ -1,8 +1,4 @@
 <?php
-//-----Défini un cookie qui sera envoyé avec le reste des en-têtes HTTP-----------------
-setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
-
-echo "c'est pas OK";
 
 //---Défini les actions de l'annonceur---------------------------------------------------
 class Annonce extends DbConnect {
@@ -66,12 +62,12 @@ class Annonce extends DbConnect {
         return $this->fichier;
     }
 
-    //---Fichier de l'annonceur à uploader---------------------------------------------------
-    function setIdUtilisateur(string $idutilisateur){
+    //---Id de l'utilisateur---------------------------------------------------
+    function setIdUtilisateur(int $id) {
         $this->idutilisateur = $idutilisateur;
     }
                     
-    function getIdUtilisateur() : string {
+    function getIdUtilisateur() : int {
         return $this->idutilisateur;
     }
 
@@ -86,12 +82,12 @@ class Annonce extends DbConnect {
         $datatab = [];
 
         foreach ($datas as $data) {
-            $user = new utilisateur();
+            $user = new Annonce();
             $user->setId_Annonce($data['id_annonce']);
             $user->setTitre_Annonce($data['Titre_annonce']);
             $user->setDescription($data['description']);
             $user->setPrix($data['prix']);
-            $user->setPassword($data['fichier']);
+            $user->setFichier($data['fichier']);
             $user->setIdUtilisateur($data['idutilisateur']);
 
             //Appel aux autres setters
@@ -101,6 +97,32 @@ class Annonce extends DbConnect {
         return $datatab;
     }
 
+    //---Permet de me connecter sur une ligne d'une donnée dans une table-----------
+    function selectByUser(){
+        $querry ="SELECT * FROM annonce WHERE idutilisateur = :id;";
+        $result = $this->pdo->prepare($query);
+        $result->bindValue('id', $this->idutilisateur, PDO::PARAM_STR);
+        $result->execute();
+        $datas = $result->fetchAll();
+        var_dump($datas);
+
+        $annonce = [];
+        foreach($datas as $elem) {
+            $annonce =new Annonce();
+            $annonce->setID_Annonce($elem['id_annonce']);
+            $annonce->setTitre_Annonce($elem['Titre_annonce']);
+            $annonce->setDescription($elem['description']);
+            $annonce->setPrix($elem['prix']);
+            $annonce->setFichier($elem['fichier']);
+
+            array_push($annonce);
+        }
+
+        return $annonce;
+    }
+
+    
+
     //---sélection d'une ligne dans la table (selon son ID)----------------------
     function select() {
         $querry ="SELECT * FROM annonce WHERE id_annonce = $this->id;";
@@ -109,6 +131,23 @@ class Annonce extends DbConnect {
         $data = $result->fetch();
     
             return $this;
+    }
+
+    //---Permet d'insérer une nouvelle ligne de données dans une table-----------
+    function insert() {
+        var_dump($this);
+            
+        $query = "INSERT INTO annonce(Titre_annonce, description, prix, fichier) VALUES (:Titre_annonce, :description, :prix , :fichier)";
+    
+        $result = $this->pdo->prepare($query);
+        $result->bindValue('Titre_annonce', $this->titre_annonce, PDO::PARAM_STR);
+        $result->bindValue('description', $this->description, PDO::PARAM_STR);
+        $result->bindValue('prix', $this->prix, PDO::PARAM_STR);
+        $result->bindValue('fichier', $this->fichier, PDO::PARAM_STR);
+        $result->execute();
+    
+        $this->id_annonce = $this->pdo->lastInsertId();
+        return $this;
     }
 
     //---Mettre à jour un élément de la table------------------------------------
