@@ -153,8 +153,6 @@ function deconnectUser() {
 //--------------------------------------------------------------------------------
 //.TEMPLATE
 // Affichage du système de templates HTML
-
-
 ?>
  
 <!DOCTYPE html>

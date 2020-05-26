@@ -2,9 +2,9 @@
 //-----Défini un cookie qui sera envoyé avec le reste des en-têtes HTTP-----------------
 setcookie('save', 'black', time() + 182 * 24 * 60 * 60, '/');
 
-echo "c'est OK";
+echo "c'est pas OK";
 
-//---Défini les actions de l'annonceur-------------------------------------------------
+//---Défini les actions de l'annonceur---------------------------------------------------
 class Annonce extends DbConnect {
     private $id_annonce;
     private $titre_annonce;
@@ -75,7 +75,7 @@ class Annonce extends DbConnect {
         return $this->idutilisateur;
     }
 
-    //---Extension de la base de donnée dbconnect-----------------------------------
+//---Extension de la base de donnée dbconnect-----------------------------------
     //---sélection de toutes les données d'une table----------------------------
     function selectAll(){
         $query = "SELECT * FROM annonce";
@@ -96,6 +96,7 @@ class Annonce extends DbConnect {
 
             //Appel aux autres setters
             array_push($datatab, $user);
+
         }
         return $datatab;
     }
@@ -119,5 +120,4 @@ class Annonce extends DbConnect {
     function delete() {
 
     }
-
 }
