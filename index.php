@@ -25,25 +25,25 @@ $route = isset($_REQUEST["route"])? $_REQUEST["route"] : "home";
 // var_dump($route);
 
 switch($route) {
-    case "home" : $include = showHome(); // Affiche la page d'accueil
+    case "home" : $view = showHome(); // Affiche la page d'accueil
         break;
     case "insert_user" : insert_User(); // enregigetrement d'un utilisateur
         break;
     case "connect_user" : connect_User(); // Connection d'un utilisateur
         break;
-    case "membre" : $include = showMembre(); // Afficher l'espace membre pour un utilisateur connecter
+    case "membre" : $view = showMembre(); // Afficher l'espace membre pour un utilisateur connecter
         break; 
     case "deconnect" : deconnectUser(); // Deconnection de l'utilisateur
         break;
-    case "login" : $include = showLogin(); // Action pour charger la page de connection
+    case "login" : $view = showLogin(); // Action pour charger la page de connection
         break;
-    case "inscription" : $include = showInscription(); // Action pour charger la page d'inscription
+    case "inscription" : $view = showInscription(); // Action pour charger la page d'inscription
         break;
-    case "publish" : $include = showPublish(); // Action pour charger la page d'insertion d'une annonce
+    case "publish" : $view = showPublish(); // Action pour charger la page d'insertion d'une annonce
         break;
     case "insert_annonce" : insert_Annonce(); // Action pour enregistrer une annonce
         break;
-    default : $include = showHome(); // Afficher la page d'accueil
+    default : $view = showHome(); // Afficher la page d'accueil
 }
 
 //--------------------------------------------------------------------------------
@@ -59,34 +59,33 @@ function showHome() : string {
        header("location:index.php?route=membre"); 
     }
 
-    // return ["template" => "home.php", "datas" => $datas];
-    return "home.php";
+    $datas = [];
+    return ["template" => "home.php", "datas" => $datas];
 }
 
 //--->redirigé vers l'espace membre
 function showMembre() {
-    // $annonce = new Annonce;
+    $user = new Utilisateur();
     // // $annonce->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
     // $annonce->selectByUser();
 
-    // $datas = [];
-    // return ["template" => "membre.php", "datas" => $datas];
-    return "membre.php";
+    $datas = [];
+    return ["template" => "membre.php", "datas" => $datas];
 }
 
 //--->redirigé vers la page login
 function showLogin() {
-    return "login.php";
+    return ["template" => "login.php"];
 }
 
 //--->redirigé vers la page publish(publier une annonce)
 function showPublish() {
-    return "publish.php";
+    return ["template" => "publish.php"];
 }
 
 //--->Redirigé vers la page inscription
 function showInscription() {
-    return "inscription.php";
+    return ["template" => "inscription.php"];
 }
 
 //--->Fonctionnalité redirigées
@@ -195,7 +194,7 @@ function deconnectUser() {
 
         <!---Inclusion sous templates--->
 
-        <?php  require "html/$include"; ?>
+        <?php  require "html/{$view['template']}"; ?>
 
 </body>
 </html>
