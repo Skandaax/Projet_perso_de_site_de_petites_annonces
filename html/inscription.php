@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Accueil</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <link rel="stylesheet" type="text/css" href="../css/header.css">
 </head>
 
@@ -18,11 +18,9 @@
             <div class="m-right">
                 <a href="index.php?route=home" class="m-link">Accueil</a>
                 <a href="index.php?route=login" class="m-link">Mon compte</a>
-                <a href="index.php?route=publish" class="m-link">Publier une annonce</a>
             </div>
         </div>
     </nav>
-
 </header>
 
 <body>
@@ -32,10 +30,6 @@
 </div>
 
 <div class="center_div troisd">
-    <div class="center">  
-        <h2> Inscription </h2>
-    </div>
-&nbsp;
     <form action="index.php?route=insert_user" method="POST">
         <div id="espace_1">
             <input type="text" id="pseudo" name="Pseudo" placeholder="pseudo"  required>
@@ -56,9 +50,8 @@
             <input type="submit" value="envoyer">
         </div>
     </form>
-    
 </div>
-<div class="log"><a href="index.php?route=login">Login</a></div>
+<div class="log center_div"><a href="index.php?route=login">Login</a></div>
 
 <!--Footer-->
 <footer  class="f-footer">

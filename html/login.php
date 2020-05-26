@@ -20,7 +20,6 @@
             <div class="m-right">
                 <a href="index.php?route=home" class="m-link">Accueil</a>
                 <a href="index.php?route=login" class="m-link">Mon compte</a>
-                <a href="index.php?route=publish" class="m-link">Publier une annonce</a>
             </div>
         </div>
     </nav>
@@ -33,17 +32,17 @@
     <h2>Connexion <h2>
 </div>
 &nbsp;
-<div class="center_div troisd ">
+<div class="center_div ">
     <form action="index.php?route=connect_user" method="POST">
-        <div id="espace_2 login_center"><input type="text" id="pseudo name="utilisateur" placeholder="Votre pseudo"></div>
+        <div id="espace_2 login_center"><input type="text" id="pseudo name="utilisateur" placeholder="Votre pseudo" required></div>
         
-        <div id="espace_3"> <input type="password" id="password" name="password" placeholder="Votre mot de passe"></div>
+        <div id="espace_3"> <input type="password" id="password" name="password" placeholder="Votre mot de passe" required></div>
        
         <div id="espace_4"><input type="submit" value="Se connecter"></div>
         
     </form>    
 </div>
-<div class="log"><a href="index.php?route=inscription">Inscription</a></div>
+<div class="log center_div"><a href="index.php?route=inscription">Inscription</a></div>
 
 <!--Footer-->
 <footer  class="f-footer">

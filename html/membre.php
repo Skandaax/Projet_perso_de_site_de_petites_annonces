@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <title>Accueil</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <link rel="stylesheet" type="text/css" href="../css/header.css">
 </head>
 
@@ -22,7 +22,7 @@
             </div>
             <div class="m-right">
                 <a href="index.php?route=home" class="m-link">Accueil</a>
-                <a href="#" class="m-link">Editer une annonce</a>
+                <a href="index.php?route=publish" class="m-link">Publier une annonce</a>
                 <a href="index.php?route=deconnect" class="m-link">Deconnexion</a>
             </div>
         </div>
@@ -34,8 +34,14 @@
 <div id="center">
     <h2>Mon profil<h2>
 </div>
-
-<form action="#" method="POST">
+<div class="center_div">
+    <form action="#" method="POST">
+        <div id="espace_1">
+            <select name="Rôle de l'espace membre" size="1">
+                <option>Super admin
+                <option>Membre
+            </select>
+        </div>
         <div id="espace_1">
             <input type="text" id="pseudo" name="Pseudo" placeholder="pseudo"  required>
         </div>
@@ -52,7 +58,7 @@
             <input type="password" id="password2" name="Password2" placeholder="Confirmer la modification de votre mot de passe">
         </div>
         <div id="espace_5">
-            <h2>Modifier mon avatar</h2>
+            <h2>Ajouter / Modifier mon avatar</h2>
         </div>
         <div id="espace_4">
             <input type="file" name="fichier"/> 
@@ -62,6 +68,11 @@
             <input type="submit" value="Mettre à jour">
         </div>
     </form>
+</div>
+
+<div class="center_div">
+
+</div>
 
 <!--Footer-->
 <footer  class="f-footer">
