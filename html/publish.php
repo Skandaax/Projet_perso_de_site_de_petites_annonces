@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Publier une annonce</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="header.css">
 
 </head>
 
@@ -57,9 +57,7 @@
         </div>
     </form>    
 </div>
-<br>
-<br>
-<br>
+
 <!--Footer-->
 <footer  class="f-footer">
     <p class="mentions" ><a id="link" href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a>

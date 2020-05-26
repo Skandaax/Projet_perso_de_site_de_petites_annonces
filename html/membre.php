@@ -43,7 +43,7 @@
             </select>
         </div>
         <div id="espace_1">
-            <input type="text" id="pseudo" name="Pseudo" placeholder="pseudo"  required>
+            <input type="text" id="pseudo" name="Pseudo" placeholder="pseudo" required>
         </div>
         <div id="espace_2">
             <input type="text" id="email" name="email" placeholder="Votre email" required>
