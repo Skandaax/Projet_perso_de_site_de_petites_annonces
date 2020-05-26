@@ -57,7 +57,9 @@
         </div>
     </form>    
 </div>
-
+<br>
+<br>
+<br>
 <!--Footer-->
 <footer  class="f-footer">
     <p class="mentions" ><a id="link" href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a>
