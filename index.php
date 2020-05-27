@@ -54,7 +54,7 @@ switch($route) {
 //---(vers un choix conduisant à un affichage)
 //---Fonctionnalités d'affichage : 
 //--->redirigé vers l'accueil
-function showHome() : string {
+function showHome()   {
     if(isset($_SESSION["utilisateur"])) { 
        header("location:index.php?route=membre"); 
     }
@@ -65,11 +65,13 @@ function showHome() : string {
 
 //--->redirigé vers l'espace membre
 function showMembre() {
-    $user = new Utilisateur();
-    // // $annonce->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
-    // $annonce->selectByUser();
 
-    $datas = [];
+    $ad = new Annonce();
+    $ad->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
+    $datas = [""];
+    $datas['ads'] = $ad->selectByUser();
+
+    
     return ["template" => "membre.php", "datas" => $datas];
 }
 
@@ -90,10 +92,6 @@ function showInscription() {
 
 //--->Fonctionnalité redirigées
 function insert_User() {
-
-echo " je suis bien la";
-
-// var_dump($_POST);
 
 //---Traitement d'un nouvelle utilisateur---
 if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]) && !empty($_POST["Password"] === $_POST["Password2"])) {
@@ -135,14 +133,19 @@ if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
 
 //--->Inserer des annonces
 function insert_Annonce() {
-    $annonce = new Annonce();
-    $annonce->setTitre_Annonce($_POST["Titre_annonce"]);
-    $annonce->setDescription($_POST["description"]);
-    $annonce->setPrix($_POST["prix"]);
-    $annonce->setFichier($_POST["fichier"]);
+    if(!empty($_POST["Titre_annonce"]) && !empty($_POST["description"])
+    && !empty($_POST["prix"]) && !empty($_POST["fichier"])) {
 
-    $annonce->insert();
+    $ad = new Annonce();
+    $ad->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
+    $ad->setTitre_Annonce($_POST["Titre_annonce"]);
+    $ad->setDescription($_POST["description"]);
+    $ad->setPrix($_POST["prix"]);
+    $ad->setFichier($_POST["fichier"]);
 
+    $ad->insert();
+    }
+    
     header('Location:index.php?route=membre');
 }
 
@@ -158,7 +161,7 @@ function connect_User() {
         var_dump($new);
 
         if($new && password_verify($_POST["Password"], $new['Password'])) {
-            $_SESSION['idutilisateur'] = $new['idtilisateur'];
+            $_SESSION['idutilisateur'] = $new['idutilisateur'];
             $_SESSION['Pseudo'] = $new['Pseudo'];
             $_SESSION['Password'] = $new['Password'];
             header('Location:index.php?route=membre');

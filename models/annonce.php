@@ -82,13 +82,13 @@ class Annonce extends DbConnect {
         $datatab = [];
 
         foreach ($datas as $data) {
-            $user = new Annonce();
-            $user->setId_Annonce($data['id_annonce']);
-            $user->setTitre_Annonce($data['Titre_annonce']);
-            $user->setDescription($data['description']);
-            $user->setPrix($data['prix']);
-            $user->setFichier($data['fichier']);
-            $user->setIdUtilisateur($data['idutilisateur']);
+            $ad = new Annonce();
+            $ad->setId_Annonce($data['id_annonce']);
+            $ad->setTitre_Annonce($data['Titre_annonce']);
+            $ad->setDescription($data['description']);
+            $ad->setPrix($data['prix']);
+            $ad->setFichier($data['fichier']);
+            $ad->setIdUtilisateur($data['idutilisateur']);
 
             //Appel aux autres setters
             array_push($datatab, $user);
@@ -97,28 +97,29 @@ class Annonce extends DbConnect {
         return $datatab;
     }
 
-    //---Permet de me connecter sur une ligne d'une donnée dans une table-----------
+    //---Permet de d'enregistrer  une donnée dans une table-----------
     function selectByUser(){
-        $querry ="SELECT * FROM annonce WHERE idutilisateur = :id;";
+        $query ="SELECT * FROM annonce WHERE idutilisateur = :id;";
         $result = $this->pdo->prepare($query);
-        $result->bindValue('id', $this->idutilisateur, PDO::PARAM_STR);
+        $result->bindValue('id', $this->idutilisateur, PDO::PARAM_INT);
         $result->execute();
         $datas = $result->fetchAll();
         var_dump($datas);
 
-        $annonce = [];
+        $ad = [];
         foreach($datas as $elem) {
-            $annonce =new Annonce();
-            $annonce->setID_Annonce($elem['id_annonce']);
-            $annonce->setTitre_Annonce($elem['Titre_annonce']);
-            $annonce->setDescription($elem['description']);
-            $annonce->setPrix($elem['prix']);
-            $annonce->setFichier($elem['fichier']);
+            $ad =new Annonce();
+            $ad->setID_Annonce($elem['id_annonce']);
+            $ad->setTitre_Annonce($elem['Titre_annonce']);
+            $ad->setDescription($elem['description']);
+            $ad->setIdUtilisateur($elem['idutilisateur']);
+            $ad->setPrix($elem['prix']);
+            $ad->setFichier($elem['fichier']);
 
             array_push($annonce);
         }
 
-        return $annonce;
+        return $ad;
     }
 
     

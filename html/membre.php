@@ -1,5 +1,12 @@
 <?php
 
+$ads = $view["datas"]["ads"];
+var_dump($ads);
+
+$list = "";
+foreach($ads as $ad) {
+    $list .= "<li>". $list->getTitre_Annonce(). "". $list->getDescription()."".getPrix()."". getFichier()."</li>";
+}
 
 ?>
 
@@ -70,8 +77,9 @@
     </form>
 </div>
 
-<div class="center_div">
 
+<div class="center_div">
+    <?php $list ?>
 </div>
 
 <!--Footer-->
