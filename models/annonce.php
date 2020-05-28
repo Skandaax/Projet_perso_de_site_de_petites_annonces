@@ -18,8 +18,8 @@ class Annonce extends DbConnect {
     //---Get - Récupère la valeur d'une proprièté-----------------------------------------
     //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
     //---ID de l'annonce------------------------------------------------------------------
-    function setId_Annonce(int $id_ad) {
-        $this->id_annonce = $id_ad;
+    function setId_Annonce(int $id) {
+        $this->id_annonce = $id;
     }
 
     function getId_Annonce() : int {
@@ -81,69 +81,74 @@ class Annonce extends DbConnect {
 
         $datatab = [];
 
-        foreach ($datas as $data) {
-            $ad = new Annonce();
-            $ad->setId_Annonce($data['id_annonce']);
-            $ad->setTitre_Annonce($data['Titre_annonce']);
-            $ad->setDescription($data['description']);
-            $ad->setPrix($data['prix']);
-            $ad->setFichier($data['fichier']);
-            $ad->setIdUtilisateur($data['idutilisateur']);
+        foreach ($datas as $elem) {
+            $annonce = new Annonce();
+            $annonce->setId_Annonce($data['id_annonce']);
+            $annonce->setTitre_Annonce($data['Titre_annonce']);
+            $annonce->setDescription($data['description']);
+            $annonce->setPrix($data['prix']);
+            $annonce->setFichier($data['fichier']);
+            $annonce->setIdUtilisateur($data['utilisateur']);
 
             //Appel aux autres setters
-            array_push($datatab, $ad);
+            array_push($datatab, $annonce);
 
         }
         return $datatab;
     }
 
-    //---Permet de d'enregistrer  une donnée dans une table-----------
+    //---Permet d'enregistrer  une donnée dans une table-----------
     function selectByUser(){
         $query ="SELECT * FROM annonce WHERE idutilisateur = :id;";
         $result = $this->pdo->prepare($query);
-        $result->bindValue('id', $this->idutilisateur, PDO::PARAM_INT);
+        $result->bindValue("id", $this->idutilisateur, PDO::PARAM_INT);
         $result->execute();
         $datas = $result->fetchAll();
-        var_dump($datas);
 
-        $ads = [];
+        $annonces = [];
         foreach($datas as $elem) {
-            $ad =new Annonce();
-            $ad->setID_Annonce($elem['id_annonce']);
-            $ad->setTitre_Annonce($elem['Titre_annonce']);
-            $ad->setDescription($elem['description']);
-            $ad->setIdUtilisateur($elem['idutilisateur']);
-            $ad->setPrix($elem['prix']);
-            $ad->setFichier($elem['fichier']);
+            $annonce = new Annonce();
+            $annonce->setID_Annonce($elem['id_annonce']);
+            $annonce->setTitre_Annonce($elem['Titre_annonce']);
+            $annonce->setDescription($elem['description']);
+            $annonce->setPrix($elem['prix']);
+            $annonce->setFichier($elem['fichier']);
 
-            array_push($ads, $ad);
+            array_push($annonces, $annonce);
         }
 
-        return $ads;
+        var_dump($annonces);
+        return $annonces;
+
     }
 
     //---sélection d'une ligne dans la table (selon son ID)----------------------
     function select() {
-        $query ="SELECT * FROM annonce WHERE id_annonce = $this->id_ad;";
+
+        $query ="SELECT * FROM annonce WHERE id_annonce = :id";
         $result = $this->pdo->prepare($query);
+        $result->bindValue("id", $this->id_annonce, PDO::PARAM_INT);
         $result->execute();
         $data = $result->fetch();
+        $this->setIdUtilisateur($data['Titre_annonce']);
+
     
             return $this;
+
     }
 
     //---Permet d'insérer une nouvelle ligne de données dans une table-----------
     function insert() {
         var_dump($this);
             
-        $query = "INSERT INTO annonce(Titre_annonce, description, prix, fichier) VALUES (:Titre_annonce, :description, :prix , :fichier)";
+        $query = "INSERT INTO annonce (Titre_annonce, description, prix, fichier) VALUES (:Titre_annonce, :description, :prix , :fichier)";
     
         $result = $this->pdo->prepare($query);
         $result->bindValue('Titre_annonce', $this->titre_annonce, PDO::PARAM_STR);
         $result->bindValue('description', $this->description, PDO::PARAM_STR);
         $result->bindValue('prix', $this->prix, PDO::PARAM_STR);
         $result->bindValue('fichier', $this->fichier, PDO::PARAM_STR);
-        // $result->bindValue('id', $this->idutilisateur, PDO::PARAM_INT);
+        $result->bindValue('id', $this->idutilisateur, PDO::PARAM_INT);
         $result->execute();
     
         $this->id_annonce = $this->pdo->lastInsertId();

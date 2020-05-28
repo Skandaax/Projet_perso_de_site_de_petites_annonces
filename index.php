@@ -66,14 +66,16 @@ function showHome()   {
 //--->redirigé vers l'espace membre
 function showMembre() {
 
-    $ad = new Annonce();
-    $ad->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
-    $datas = [""];
-    $datas['ads'] = $ad->selectByUser();
+    $annonce = new Annonce();
+    $datas = ["Hello orld"];
+    $annonce->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
+    $datas['annonces'] = $annonce->selectByUser();
+    $annonce->select();
 
-
-    
     return ["template" => "membre.php", "datas" => $datas];
+
+    var_dump($datas);
+
 }
 
 //--->redirigé vers la page login
@@ -137,13 +139,14 @@ function insert_Annonce() {
     if(!empty($_POST["Titre_annonce"]) && !empty($_POST["description"])
     && !empty($_POST["prix"]) && !empty($_POST["fichier"])) {
 
-    $ad = new Annonce();
-    $ad->setTitre_Annonce($_POST["Titre_annonce"]);
-    $ad->setDescription($_POST["description"]);
-    $ad->setPrix($_POST["prix"]);
-    $ad->setFichier($_POST["fichier"]);
+    $annonce = new Annonce();
+    $annonce->setTitre_Annonce($_POST["Titre_annonce"]);
+    $annonce->setIdUtilisateur($_SESSION['utilisateur']['id']);
+    $annonce->setDescription($_POST["description"]);
+    $annonce->setPrix($_POST["prix"]);
+    $annonce->setFichier($_POST["fichier"]);
 
-    $ad->insert();
+    $annonce->insert();
     }
     
     header('Location:index.php?route=membre');

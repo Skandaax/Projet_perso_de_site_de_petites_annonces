@@ -15,7 +15,7 @@
     <nav class="menu">
         <div class="inner">
             <div class="m-left">
-                <h1 class="logo">Annonces</h1>
+                <h1 class="logo">Publier une nnonces</h1>
             </div>
             <div class="m-right">
                 <a href="index.php?route=home" class="m-link">Accueil</a>
@@ -58,12 +58,12 @@
     </form>    
 </div>
 
-<!--Footer-->
+<!-- Footer
 <footer  class="f-footer">
     <p class="mentions" ><a id="link" href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a>
         <h6>Copyright &copy2020</h6>
     </p>
-</footer>
+</footer> -->
 
 </body>
 </html>

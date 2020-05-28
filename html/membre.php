@@ -1,12 +1,7 @@
 <?php
 
-$ads = $view["datas"]["ads"];
-var_dump($ads);
-
-$list = "";
-foreach($ads as $ad) {
-    $list .= "<li>". $list->getTitre_Annonce(). "". $list->getDescription()."".getPrix()."". getFichier()."</li>";
-}
+$annonces = $view["datas"]["annonces"];
+var_dump($view['datas']);
 
 ?>
 
@@ -79,7 +74,12 @@ foreach($ads as $ad) {
 
 
 <div class="center_div">
-    <?php $list ?>
+    <ul><?php foreach($annonces as $annonces) :?> 
+        <li>Titre de l'annonce : <?php $annonce->getTitre_Annonce()?> 
+        Description : <?php  $annonce->getDescription()?> 
+        Prix : <?php getPrix() ?> <?php getFichier()?> </li>
+        <?php endforeach ?>
+    </ul>
 </div>
 
 <!--Footer-->
