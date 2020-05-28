@@ -18,8 +18,8 @@ class Annonce extends DbConnect {
     //---Get - Récupère la valeur d'une proprièté-----------------------------------------
     //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
     //---ID de l'annonce------------------------------------------------------------------
-    function setId_Annonce(int $id) {
-        $this->id_annonce = $id;
+    function setId_Annonce(int $id_ad) {
+        $this->id_annonce = $id_ad;
     }
 
     function getId_Annonce() : int {
@@ -63,10 +63,10 @@ class Annonce extends DbConnect {
     }
 
     //---Id de l'utilisateur---------------------------------------------------
-    function setIdUtilisateur(int $id) {
-        $this->idutilisateur = $idutilisateur;
+    function setIdUtilisateur($id) {
+        $this->idutilisateur = $id;
     }
-                    
+
     function getIdUtilisateur() : int {
         return $this->idutilisateur;
     }
@@ -91,7 +91,7 @@ class Annonce extends DbConnect {
             $ad->setIdUtilisateur($data['idutilisateur']);
 
             //Appel aux autres setters
-            array_push($datatab, $user);
+            array_push($datatab, $ad);
 
         }
         return $datatab;
@@ -106,7 +106,7 @@ class Annonce extends DbConnect {
         $datas = $result->fetchAll();
         var_dump($datas);
 
-        $ad = [];
+        $ads = [];
         foreach($datas as $elem) {
             $ad =new Annonce();
             $ad->setID_Annonce($elem['id_annonce']);
@@ -116,17 +116,15 @@ class Annonce extends DbConnect {
             $ad->setPrix($elem['prix']);
             $ad->setFichier($elem['fichier']);
 
-            array_push($annonce);
+            array_push($ads, $ad);
         }
 
-        return $ad;
+        return $ads;
     }
-
-    
 
     //---sélection d'une ligne dans la table (selon son ID)----------------------
     function select() {
-        $querry ="SELECT * FROM annonce WHERE id_annonce = $this->id;";
+        $query ="SELECT * FROM annonce WHERE id_annonce = $this->id_ad;";
         $result = $this->pdo->prepare($query);
         $result->execute();
         $data = $result->fetch();
@@ -145,6 +143,7 @@ class Annonce extends DbConnect {
         $result->bindValue('description', $this->description, PDO::PARAM_STR);
         $result->bindValue('prix', $this->prix, PDO::PARAM_STR);
         $result->bindValue('fichier', $this->fichier, PDO::PARAM_STR);
+        // $result->bindValue('id', $this->idutilisateur, PDO::PARAM_INT);
         $result->execute();
     
         $this->id_annonce = $this->pdo->lastInsertId();

@@ -71,6 +71,7 @@ function showMembre() {
     $datas = [""];
     $datas['ads'] = $ad->selectByUser();
 
+
     
     return ["template" => "membre.php", "datas" => $datas];
 }
@@ -137,7 +138,6 @@ function insert_Annonce() {
     && !empty($_POST["prix"]) && !empty($_POST["fichier"])) {
 
     $ad = new Annonce();
-    $ad->setIdUtilisateur($_SESSION["utilisateur"]["id"]);
     $ad->setTitre_Annonce($_POST["Titre_annonce"]);
     $ad->setDescription($_POST["description"]);
     $ad->setPrix($_POST["prix"]);
@@ -156,7 +156,7 @@ function connect_User() {
         $user = new Utilisateur();
         $user->setPseudo($_POST["Pseudo"]);
         $user->setPassword($_POST["Password"]);
-        $new = $user->selectbyuser();
+        $new = $user->selectByUser();
         
         var_dump($new);
 
