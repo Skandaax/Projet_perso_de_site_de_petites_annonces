@@ -1,6 +1,6 @@
 <?php
 
-$annonces = $view["datas"]["annonces"];
+$annonce = $view["datas"]["annonce"];
 var_dump($view['datas']);
 
 ?>
@@ -37,7 +37,7 @@ var_dump($view['datas']);
     <h2>Mon profil<h2>
 </div>
 <div class="center_div">
-    <form action="#" method="POST">
+    <form action="index.php?route=<?php isset($view['datas']['user'])? "mod_user" : "insert_user"; ?>" method="POST">
         <div id="espace_1">
             <select name="Rôle de l'espace membre" size="1">
                 <option>Super admin
@@ -45,16 +45,16 @@ var_dump($view['datas']);
             </select>
         </div>
         <div id="espace_1">
-            <input type="text" id="pseudo" name="Pseudo" placeholder="pseudo" required>
+            <input type="text" id="pseudo" name="Pseudo" placeholder="pseudo">
         </div>
         <div id="espace_2">
-            <input type="text" id="email" name="email" placeholder="Votre email" required>
+            <input type="text" id="email" name="email" placeholder="Votre email" >
         </div>
         <div id="espace_2">
             <input type="text" id="phone" name="phone" placeholder="téléphone" >
         </div>
         <div id="espace_3">
-            <input type="password" id="password" name="Password" placeholder="Modifier mon mot de passe" required>
+            <input type="password" id="password" name="Password" placeholder="Modifier mon mot de passe" >
         </div>
         <div id="espace_4">
             <input type="password" id="password2" name="Password2" placeholder="Confirmer la modification de votre mot de passe">
@@ -72,9 +72,10 @@ var_dump($view['datas']);
     </form>
 </div>
 
+<div class="center_div"><h2>Les annonces</h2><div>
 
 <div class="center_div">
-    <ul><?php foreach($annonces as $annonces) :?> 
+    <ul><?php foreach($datas as $ad) :?> 
         <li>Titre de l'annonce : <?php $annonce->getTitre_Annonce()?> 
         Description : <?php  $annonce->getDescription()?> 
         Prix : <?php getPrix() ?> <?php getFichier()?> </li>
@@ -82,12 +83,12 @@ var_dump($view['datas']);
     </ul>
 </div>
 
-<!--Footer-->
+<!-- Footer
 <footer  class="f-footer">
     <p class="mentions" ><a id="link" href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a>
         <h6>Copyright &copy2020</h6>
     </p>
-</footer>
+</footer> -->
 
 </body>
 </html>

@@ -1,3 +1,11 @@
+<?php
+
+$annonces = $view["datas"]["annonces"];
+var_dump($view['datas']);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head >
@@ -28,8 +36,13 @@
 
 <!--Body-->
 <body>
-    <div class="t-body">
-
+    <div class="center_div">
+    <ul><?php foreach($annonces as $annonces) :?> 
+        <li>Titre de l'annonce : <?php $annonce->getTitre_Annonce()?> 
+        Description : <?php  $annonce->getDescription()?> 
+        Prix : <?php getPrix() ?> <?php getFichier()?> </li>
+        <?php endforeach ?>
+    </ul>
     </div>
 </body>
 

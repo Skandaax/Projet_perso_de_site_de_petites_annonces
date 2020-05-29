@@ -47,10 +47,10 @@
             <option>PC de bureau
             </select>
         </div>
-        <div id="espace_2"> <input type="Titre_annonce" id="" name="Titre_annonce" placeholder="Titre de l'annonce" required></div>
+        <div id="espace_2"> <input type="text" id="" name="Titre_annonce" placeholder="Titre de l'annonce" required></div>
             <div><textarea id="espace_3" name="description" placeholder="description" required></textarea>
-        <div id="espace_4"> <input type="prix" id="" name="prix" placeholder="Prix" required></div>
-            <input id="espace_4" type="file" name="fichier" required>
+        <div id="espace_4"> <input type="text" id="" name="prix" placeholder="Prix" required></div>
+            <input id="espace_4" type="file" name="fichier" >
         <div>
         <div id="espace_5">
             <input type="submit" value="Publier">

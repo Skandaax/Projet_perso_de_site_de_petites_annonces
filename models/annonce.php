@@ -63,76 +63,84 @@ class Annonce extends DbConnect {
     }
 
     //---Id de l'utilisateur---------------------------------------------------
-    function setIdUtilisateur($id) {
-        $this->idutilisateur = $id;
+    function setIdUtilisateur($id_utilisateur) {
+        $this->idutilisateur = $id_utilisateur;
     }
 
-    function getIdUtilisateur() : int {
+    function getIdUtilisateur() {
         return $this->idutilisateur;
     }
 
 //---Extension de la base de donnée dbconnect-----------------------------------
     //---sélection de toutes les données d'une table----------------------------
     function selectAll(){
-        $query = "SELECT * FROM annonce";
-        $result = $this->pdo->prepare($query);
-        $result->execute();
-        $datas = $result->fetchAll();
+    $query = "SELECT * FROM annonce";
+    $result = $this->pdo->prepare($query);
+    $result->execute();
+    $datas = $result->fetchAll();
 
-        $datatab = [];
+    // $tab = [];
 
-        foreach ($datas as $elem) {
-            $annonce = new Annonce();
-            $annonce->setId_Annonce($data['id_annonce']);
-            $annonce->setTitre_Annonce($data['Titre_annonce']);
-            $annonce->setDescription($data['description']);
-            $annonce->setPrix($data['prix']);
-            $annonce->setFichier($data['fichier']);
-            $annonce->setIdUtilisateur($data['utilisateur']);
+    // foreach ($datas as $data) {
+    //     $ad = new Annonce();
+    //     $ad->setId_Annonce($data['id_annonce']);
+    //     $ad->setTitre_Annonce($data['Titre_annonce']);
+    //     $ad->setDescription($data['description']);
+    //     $ad->setPrix($data['prix']);
+    //     $ad->setFichier($data['fichier']);
+    //     $ad->setIdUtilisateur($data['idutilisateur']);
 
-            //Appel aux autres setters
-            array_push($datatab, $annonce);
+    // //Appel aux autres setters
+    // array_push($datatab, $annonce);
+    // }
+        var_dump($datatb);
 
-        }
-        return $datatab;
-    }
+        return $tab;
+}
 
     //---Permet d'enregistrer  une donnée dans une table-----------
     function selectByUser(){
-        $query ="SELECT * FROM annonce WHERE idutilisateur = :id;";
+        $query ="SELECT * FROM annonce WHERE idutilisateur = :idutilisateur";
         $result = $this->pdo->prepare($query);
-        $result->bindValue("id", $this->idutilisateur, PDO::PARAM_INT);
+        $result->bindValue("idutilisateur", $this->idutilisateur, PDO::PARAM_INT);
         $result->execute();
         $datas = $result->fetchAll();
 
-        $annonces = [];
-        foreach($datas as $elem) {
-            $annonce = new Annonce();
-            $annonce->setID_Annonce($elem['id_annonce']);
-            $annonce->setTitre_Annonce($elem['Titre_annonce']);
-            $annonce->setDescription($elem['description']);
-            $annonce->setPrix($elem['prix']);
-            $annonce->setFichier($elem['fichier']);
-
-            array_push($annonces, $annonce);
+        $tab = [];
+        foreach($datas as $data) {
+            $ad = new Annonce();
+            $ad->setID_Annonce($data['id_annonce']);
+            $ad->setTitre_Annonce($data['Titre_annonce']);
+            $ad->setDescription($data['description']);
+            $ad->setPrix($data['prix']);
+            $ad->setFichier($data['fichier']);
+            $ad->setIdUtilisateur($data['idutilisateur']);
+            
+            array_push($tab, $ad);
         }
 
-        var_dump($annonces);
-        return $annonces;
+        var_dump($tab);
+        return $tab;
 
     }
 
     //---sélection d'une ligne dans la table (selon son ID)----------------------
     function select() {
 
-        $query ="SELECT * FROM annonce WHERE id_annonce = :id";
+        $query ="SELECT id_annonce (Titre_annonce, description, prix, fichier, idutilisateur) 
+                FROM annonce WHERE (id_annonce = :id_annonce)";
         $result = $this->pdo->prepare($query);
-        $result->bindValue("id", $this->id_annonce, PDO::PARAM_INT);
+        
         $result->execute();
         $data = $result->fetch();
-        $this->setIdUtilisateur($data['Titre_annonce']);
+        $result->bindValue("id_annonce", $this->id_annonce, PDO::PARAM_INT);
+        $ad->setID_Annonce($data['id_annonce']);
+        $ad->setTitre_Annonce($data['Titre_annonce']);
+        $ad->setDescription($data['description']);
+        $ad->setPrix($data['prix']);
+        $ad->setFichier($data['fichier']);
+        $ad->setIdUtilisateur($data['idutilisateur']);
 
-    
             return $this;
 
     }
@@ -141,14 +149,14 @@ class Annonce extends DbConnect {
     function insert() {
         var_dump($this);
             
-        $query = "INSERT INTO annonce (Titre_annonce, description, prix, fichier) VALUES (:Titre_annonce, :description, :prix , :fichier)";
+        $query = "INSERT INTO annonce (Titre_annonce, description, prix, fichier) 
+                    VALUES (:Titre_annonce, :description, :prix , :fichier)";
     
         $result = $this->pdo->prepare($query);
         $result->bindValue('Titre_annonce', $this->titre_annonce, PDO::PARAM_STR);
         $result->bindValue('description', $this->description, PDO::PARAM_STR);
         $result->bindValue('prix', $this->prix, PDO::PARAM_STR);
         $result->bindValue('fichier', $this->fichier, PDO::PARAM_STR);
-        $result->bindValue('id', $this->idutilisateur, PDO::PARAM_INT);
         $result->execute();
     
         $this->id_annonce = $this->pdo->lastInsertId();

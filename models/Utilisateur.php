@@ -144,14 +144,14 @@ class Utilisateur extends DbConnect {
     function insert() {
         var_dump($this);
         
-        $query = "INSERT INTO utilisateur(Pseudo, email, phone, Password, role) VALUES (:Pseudo, :email, :phone , :Password, :role)";
+        $query = "INSERT INTO utilisateur(Pseudo, email, phone, Password, role) 
+                    VALUES (:Pseudo, :email, :phone , :Password, :role)";
 
         $result = $this->pdo->prepare($query);
         $result->bindValue('Pseudo', $this->pseudo, PDO::PARAM_STR);
         $result->bindValue('phone', $this->phone, PDO::PARAM_STR);
         $result->bindValue('email', $this->email, PDO::PARAM_STR);
         $result->bindValue('Password', $this->password, PDO::PARAM_STR);
-        $result->bindValue('role', $this->role, PDO::PARAM_STR);
         $result->execute();
 
         $this->idutilisateur = $this->pdo->lastInsertId();
@@ -171,8 +171,17 @@ class Utilisateur extends DbConnect {
 
 
     //---Mettre à jour un élément de la table------------------------------------
-    function update(){
+    function update() {
 
+        $query = "UPDATE 'utilisateur' set 'Pseudo' = :Pseudo, 'email' = :email, 'phone' = :phone, Password = :Password
+        WHERE idutilisateur = :idutilisateur ";
+
+        $result = $this->pdo->prepare($query);
+        $result->bindValue('Pseudo', $this->pseudo, PDO::PARAM_STR);
+        $result->bindValue('phone', $this->phone, PDO::PARAM_STR);
+        $result->bindValue('email', $this->email, PDO::PARAM_STR);
+        $result->bindValue('Password', $this->password, PDO::PARAM_STR);
+        $result->execute();
     }
 
     //---Supprimer une ligne de la table-----------------------------------------
