@@ -67,6 +67,9 @@ function showHome()   {
 function showMembre() {
 
 
+
+
+
     
     $datas = [];
     return ["template" => "membre.php", "datas" => $datas];
@@ -131,36 +134,40 @@ if(!empty($_POST["Pseudo"]) && !empty($_POST["phone"]) && !empty($_POST["email"]
     
 }
 
-//--->Inserer des annonces
+//--->L'utilisateur insere des annonces
 function insert_Annonce() {
 
     if(!empty($_POST["Titre_annonce"]) && !empty($_POST["description"])
     && !empty($_POST["prix"]) && !empty($_POST["fichier"])) {
 
-    $annonce = new Annonce();
-    $annonce->setIdUtilisateur($_SESSION['utilisateur']['id']);
-    
+    $ad = new Annonce();
+    $datas = ["Hello orld"];
+    $datas["ads"] = $ad->selectAll();
+    $datas['ads'] = $ad->selectByUser();
 
     if(isset($_GET['id'])) {
-        $annonce->setId_Annonce($_GET["id"]);
-        
-        $datas['annonce'] = $annonce->selectAll();
+        $ad->setIdAnnonce($_GET["id"]);
+        $annonce = $ad->select();
+        $datas['ads'] = $annonce;
     }
 
-    $annonce->setIdUtilisateur($_SESSION['id']);
-    $annonce->setTitre_Annonce($_POST["Titre_annonce"]);
-    $annonce->setDescription($_POST["description"]);
-    $annonce->setPrix($_POST["prix"]);
-    $annonce->setFichier($_POST["fichier"]);
-    $annonce->insert();
+    if(isset($_GET['ids'])) {
+        $ad->setIdUtilisateur($_SESSION['utilisateur']['ids']);
+        $ad->setIdUtilisateur($_GET["ids"]);
+        $utilisateur = $user->select();
+        $datas['ads'] = $annonce;
+    }
 
-    $datas = ["Hello orld"];
-    $datas['ad'] = $annonce->selectByUser();
-    var_dump($annonce);
+    $ad->setTitreAnnonce($_POST["Titre_annonce"]);
+    $ad->setDescription($_POST["description"]);
+    $ad->setPrix($_POST["prix"]);
+    $ad->setFichier($_POST["fichier"]);
+
+    var_dump($ad);
     }
 
 
-    header('Location:index.php?route=membre');
+    header('Location:index.php?route=publish');
 }
 
 //---Connection d'un utilisateur---
@@ -192,21 +199,7 @@ function deconnectUser() {
     header('Location:index.php');
  }
 
-//---Mettre à jour un utilisateur-----------------------------------------------
-function mod_user() {
-    $user = new Utilisateur();
-    $user->setIdUtilisateur($_SESSION["idutilisateur"]);
-    $user->setPseudo($_POST["Pseudo"]);
-    $user->setemail($_POST["email"]);
-    $user->setphone($_POST["phone"]);
-    $user->setPassword($_POST["Password"]);
 
-    $user->update();
-        
-    header("location:index.php?route=membre"); 
-
-    var_dump($user);
-}
 
 //--------------------------------------------------------------------------------
 //.TEMPLATE

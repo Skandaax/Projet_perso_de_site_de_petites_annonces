@@ -1,10 +1,3 @@
-<?php
-
-$annonce = $view["datas"]["annonce"];
-var_dump($view['datas']);
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -37,7 +30,7 @@ var_dump($view['datas']);
     <h2>Mon profil<h2>
 </div>
 <div class="center_div">
-    <form action="index.php?route=<?php isset($view['datas']['user'])? "mod_user" : "insert_user"; ?>" method="POST">
+    <form action="#" method="POST">
         <div id="espace_1">
             <select name="Rôle de l'espace membre" size="1">
                 <option>Super admin
@@ -72,18 +65,10 @@ var_dump($view['datas']);
     </form>
 </div>
 
-<div class="center_div"><h2>Les annonces</h2><div>
 
-<div class="center_div">
-    <ul><?php foreach($datas as $ad) :?> 
-        <li>Titre de l'annonce : <?php $annonce->getTitre_Annonce()?> 
-        Description : <?php  $annonce->getDescription()?> 
-        Prix : <?php getPrix() ?> <?php getFichier()?> </li>
-        <?php endforeach ?>
-    </ul>
-</div>
 
-<!-- Footer
+
+<!-- Footer-->
 <footer  class="f-footer">
     <p class="mentions" ><a id="link" href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a>
         <h6>Copyright &copy2020</h6>

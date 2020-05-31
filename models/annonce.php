@@ -1,9 +1,11 @@
 <?php
 
+require "utilisateur.php";
+
 //---Défini les actions de l'annonceur---------------------------------------------------
 class Annonce extends DbConnect {
-    private $id_annonce;
-    private $titre_annonce;
+    private $idannonce;
+    private $titreannonce;
     private $description;
     private $prix;
     private $fichier;
@@ -18,21 +20,21 @@ class Annonce extends DbConnect {
     //---Get - Récupère la valeur d'une proprièté-----------------------------------------
     //---Set - Permet d'iniialiser la valeur d'une propriété------------------------------
     //---ID de l'annonce------------------------------------------------------------------
-    function setId_Annonce(int $id) {
-        $this->id_annonce = $id;
+    function setIdAnnonce(int $id) {
+        $this->idannonce = $id;
     }
 
-    function getId_Annonce() : int {
-        return $this->id_annonce;
+    function getIdAnnonce() : int {
+        return $this->idannonce;
     }
 
     //---Titre de l'annonce----------------------------------------------------------------
-    function setTitre_Annonce(string $titre_annonce){
-        $this->titre_annonce = $titre_annonce;
+    function setTitreAnnonce(string $titreannonce){
+        $this->titreannonce = $titreannonce;
     }
     
-    function getTitre_Annonce() : string {
-        return $this->titre_annonce;
+    function getTitreAnnonce() : string {
+        return $this->titreannonce;
     }
 
     //---Description de l'annonce-----------------------------------------------------------
@@ -63,8 +65,8 @@ class Annonce extends DbConnect {
     }
 
     //---Id de l'utilisateur---------------------------------------------------
-    function setIdUtilisateur($id_utilisateur) {
-        $this->idutilisateur = $id_utilisateur;
+    function setIdUtilisateur($ids) {
+        $this->idutilisateur = $ids;
     }
 
     function getIdUtilisateur() {
@@ -79,48 +81,49 @@ class Annonce extends DbConnect {
     $result->execute();
     $datas = $result->fetchAll();
 
-    // $tab = [];
+    $tab = [];
 
-    // foreach ($datas as $data) {
-    //     $ad = new Annonce();
-    //     $ad->setId_Annonce($data['id_annonce']);
-    //     $ad->setTitre_Annonce($data['Titre_annonce']);
-    //     $ad->setDescription($data['description']);
-    //     $ad->setPrix($data['prix']);
-    //     $ad->setFichier($data['fichier']);
-    //     $ad->setIdUtilisateur($data['idutilisateur']);
+    foreach ($datas as $data) {
+        $ad = new Annonce();
+        $ad->setIdAnnonce($data['id_annonce']);
+        $ad->setTitreAnnonce($data['Titre_annonce']);
+        $ad->setDescription($data['description']);
+        $ad->setPrix($data['prix']);
+        $ad->setFichier($data['fichier']);
+        $ad->setIdUtilisateur($data['idutilisateur']);
 
-    // //Appel aux autres setters
-    // array_push($datatab, $annonce);
-    // }
-        var_dump($datatb);
+    //Appel aux autres setters
+    array_push($tab, $ad);
+    }
+        // var_dump($tab);
 
         return $tab;
 }
 
     //---Permet d'enregistrer  une donnée dans une table-----------
     function selectByUser(){
-        $query ="SELECT * FROM annonce WHERE idutilisateur = :idutilisateur";
+        $query ="SELECT * FROM annonce WHERE utilisateur = :ids";
         $result = $this->pdo->prepare($query);
-        $result->bindValue("idutilisateur", $this->idutilisateur, PDO::PARAM_INT);
+        $result->bindValue("ids", $this->idutilisateur, PDO::PARAM_INT);
         $result->execute();
         $datas = $result->fetchAll();
+        var_dump($datas);
 
-        $tab = [];
-        foreach($datas as $data) {
-            $ad = new Annonce();
-            $ad->setID_Annonce($data['id_annonce']);
-            $ad->setTitre_Annonce($data['Titre_annonce']);
-            $ad->setDescription($data['description']);
-            $ad->setPrix($data['prix']);
-            $ad->setFichier($data['fichier']);
-            $ad->setIdUtilisateur($data['idutilisateur']);
+        // $tab = [];
+        // foreach($datas as $data) {
+        //     $ad = new Annonce();
+        //     $ad->setIDAnnonce($data['id_annonce']);
+        //     $ad->setTitreAnnonce($data['Titre_annonce']);
+        //     $ad->setDescription($data['description']);
+        //     $ad->setPrix($data['prix']);
+        //     $ad->setFichier($data['fichier']);
+        //     $ad->setIdUtilisateur($data['idutilisateur']);
             
-            array_push($tab, $ad);
-        }
+        //     array_push($tab, $ad);
+        // }
 
-        var_dump($tab);
-        return $tab;
+        // var_dump($tab);
+        // return $tab;
 
     }
 
@@ -130,12 +133,11 @@ class Annonce extends DbConnect {
         $query ="SELECT id_annonce (Titre_annonce, description, prix, fichier, idutilisateur) 
                 FROM annonce WHERE (id_annonce = :id_annonce)";
         $result = $this->pdo->prepare($query);
-        
+        $result->bindValue(':id_annonce',$this->id_annonce,PDO::PARAM_INT);
         $result->execute();
         $data = $result->fetch();
-        $result->bindValue("id_annonce", $this->id_annonce, PDO::PARAM_INT);
-        $ad->setID_Annonce($data['id_annonce']);
-        $ad->setTitre_Annonce($data['Titre_annonce']);
+        $ad->setIDAnnonce($data['id_annonce']);
+        $ad->setTitreAnnonce($data['Titre_annonce']);
         $ad->setDescription($data['description']);
         $ad->setPrix($data['prix']);
         $ad->setFichier($data['fichier']);
@@ -153,13 +155,13 @@ class Annonce extends DbConnect {
                     VALUES (:Titre_annonce, :description, :prix , :fichier)";
     
         $result = $this->pdo->prepare($query);
-        $result->bindValue('Titre_annonce', $this->titre_annonce, PDO::PARAM_STR);
+        $result->bindValue('Titre_annonce', $this->titreannonce, PDO::PARAM_STR);
         $result->bindValue('description', $this->description, PDO::PARAM_STR);
         $result->bindValue('prix', $this->prix, PDO::PARAM_STR);
         $result->bindValue('fichier', $this->fichier, PDO::PARAM_STR);
         $result->execute();
     
-        $this->id_annonce = $this->pdo->lastInsertId();
+        $this->idannonce = $this->pdo->lastInsertId();
         return $this;
     }
 

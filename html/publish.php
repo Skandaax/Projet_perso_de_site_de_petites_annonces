@@ -1,3 +1,10 @@
+<?php
+
+
+$ads = $view["datas"]["ad"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -32,7 +39,7 @@
     <h2>Publier une annonce <h2>
 </div>
 <div class="center_div">
-    <form action="index.php?route=insert_annonce" method="POST">
+    <form action="index.php?route=<?=isset($view['datas']['ads'])? "" : "insert_annonce"; ?>" method="post">
         <div>
             <select name="Catégorie informatique" size="1">
             <option>Catégorie informatique
@@ -58,8 +65,21 @@
     </form>    
 </div>
 
-<!-- Footer
-<footer  class="f-footer">
+<div class="center_div"><h2>Vos annonces</h2><div>
+<div class="center_div">
+    <ul><?php foreach ($ads as $ad) :?> 
+        <li>
+        Titre de l'annonce : <?php $ad->getTitre_Annonce()?> 
+        Description : <?php  $ad->getDescription()?> 
+        Prix : <?php $ad->getPrix() ?> 
+        Avatar : <?php $ad->getFichier()?> 
+        </li>;
+        <?php endforeach ?>
+    </ul>
+</div>
+
+<!--Footer-->
+<!-- <footer  class="f-footer">
     <p class="mentions" ><a id="link" href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a>
         <h6>Copyright &copy2020</h6>
     </p>
