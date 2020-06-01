@@ -109,21 +109,21 @@ class Annonce extends DbConnect {
         $datas = $result->fetchAll();
         var_dump($datas);
 
-        // $tab = [];
-        // foreach($datas as $data) {
-        //     $ad = new Annonce();
-        //     $ad->setIDAnnonce($data['id_annonce']);
-        //     $ad->setTitreAnnonce($data['Titre_annonce']);
-        //     $ad->setDescription($data['description']);
-        //     $ad->setPrix($data['prix']);
-        //     $ad->setFichier($data['fichier']);
-        //     $ad->setIdUtilisateur($data['idutilisateur']);
+        $tab = [];
+        foreach($datas as $data) {
+            $ad = new Annonce();
+            $ad->setIDAnnonce($data['id_annonce']);
+            $ad->setTitreAnnonce($data['Titre_annonce']);
+            $ad->setDescription($data['description']);
+            $ad->setPrix($data['prix']);
+            $ad->setFichier($data['fichier']);
+            $ad->setIdUtilisateur($data['idutilisateur']);
             
-        //     array_push($tab, $ad);
-        // }
+            array_push($tab, $ad);
+        }
 
-        // var_dump($tab);
-        // return $tab;
+        var_dump($tab);
+        return $tab;
 
     }
 
